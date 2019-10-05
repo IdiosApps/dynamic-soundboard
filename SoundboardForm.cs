@@ -5,13 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace IdiosAppsSoundboard
 {
     public partial class SoundboardForm : Form
     {
         private readonly List<string> audioExtensions = new List<string>() {".mp3", ".wav"};
-        private SoundPlayer soundPlayer = new SoundPlayer();
+        private WindowsMediaPlayer soundPlayer = new WindowsMediaPlayer();
         private readonly string appDirectory = Directory.GetCurrentDirectory();
         public SoundboardForm()
         {
@@ -69,9 +70,8 @@ namespace IdiosAppsSoundboard
             // TODO Make all (or previous) button lose highlighting; highlight this button
 
             var button = sender as Button;
-            soundPlayer.SoundLocation = Path.Combine(appDirectory, button.Name);
-            soundPlayer.Load();
-            soundPlayer.Play();
+            soundPlayer.URL = Path.Combine(appDirectory, button.Name);
+            soundPlayer.controls.play();
         }
     }
 }
