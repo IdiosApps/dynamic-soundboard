@@ -45,7 +45,7 @@ namespace IdiosAppsSoundboard
                     Name = file.Name,
                     Text = Path.GetFileNameWithoutExtension(file.Name),
                     Size = new Size(100, 100),
-                    Location = new Point(random.Next(0, this.Width), random.Next(0, this.Height)),
+                    Location = new Point(random.Next(0, this.Width - 100), random.Next(0, this.Height - 100)),
                     BackColor = Color.DimGray,
                     ForeColor = Color.GhostWhite,
                     FlatStyle = FlatStyle.Flat,
