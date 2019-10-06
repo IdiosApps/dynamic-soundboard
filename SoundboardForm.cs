@@ -16,7 +16,9 @@ namespace IdiosAppsSoundboard
         private int buttonWidth = 100;
         private int buttonHeight = 100;
         private Font font;
+        private int maxRetries = 10;
         private readonly Random random = new Random();
+        private Point invalidPoint = new Point(9999,9999);
 
         public SoundboardForm()
         {
@@ -31,7 +33,12 @@ namespace IdiosAppsSoundboard
             var audioFiles = getAudioFiles();
             generateButtonSizes(audioFiles.Count);
             generateButtonFonts();
-            generateAudioButtons(audioFiles);
+            bool generatedAllButtons = false;
+            while (!generatedAllButtons)
+            {
+                Controls.Clear();
+                generatedAllButtons = generateAudioButtons(audioFiles);
+            }
             generateClickEvents();
         }
 
@@ -60,17 +67,20 @@ namespace IdiosAppsSoundboard
             font = new Font("Segoe UI", fontSize, FontStyle.Regular);
         }
 
-        private void generateAudioButtons(List<FileInfo> files)
+        private bool generateAudioButtons(List<FileInfo> files)
         {
             foreach (var file in files)
             {
-                // TODO Use number of loaded files (limited?) to fill out a fixed-size window (e.g. 4x5)
+                Point location = generateNonOverlappingPosition();
+                if (location.Equals(invalidPoint)) // can't place a new button without overlap
+                    return false;
+
                 var button = new Button
                 {
                     Name = file.Name,
                     Text = Path.GetFileNameWithoutExtension(file.Name),
                     Size = new Size(buttonWidth, buttonHeight),
-                    Location = generateNonOverlappingPosition(),
+                    Location = location, 
                     BackColor = Color.DimGray,
                     ForeColor = Color.GhostWhite,
                     FlatStyle = FlatStyle.Flat,
@@ -80,6 +90,8 @@ namespace IdiosAppsSoundboard
 
                 Controls.Add(button);
             }
+
+            return true;
         }
 
         private void generateClickEvents()
@@ -100,7 +112,8 @@ namespace IdiosAppsSoundboard
 
         private Point generateNonOverlappingPosition()
         {
-            while (true) // To be dynamic, would have to adjust size (& font) for large # of files
+            int retries = 0;
+            while (retries < maxRetries)
             {
                 bool newButtonOverlaps = false;
 
@@ -116,7 +129,12 @@ namespace IdiosAppsSoundboard
 
                 if (!newButtonOverlaps)
                     return location;
+
+                retries++;
             }
+            
+            // Existing buttons are making it awkward to make a new button - start from scratch
+            return invalidPoint;
         }
     }
 }
