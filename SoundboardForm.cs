@@ -19,7 +19,7 @@ namespace IdiosAppsSoundboard
         private Font font;
         private int maxRetries = 10;
         private readonly Random random = new Random();
-        private Point invalidPoint = new Point(9999,9999);
+        private readonly Point invalidPoint = new Point(9999,9999);
 
         public SoundboardForm()
         {
