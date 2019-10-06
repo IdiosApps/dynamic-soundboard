@@ -30,7 +30,7 @@ namespace IdiosAppsSoundboard
             Width = Screen.PrimaryScreen.Bounds.Width / 2;
             buttonPadding = Convert.ToInt32(Width * 0.02);
             titlebarHeight = Height - ClientSize.Height;
-            Text = "IdiosApps' dynamic soundbar";
+            Text = "IdiosApps' dynamic soundboard";
         }
 
         private void SoundboardForm_Load(object sender, EventArgs e)
