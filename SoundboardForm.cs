@@ -35,7 +35,7 @@ namespace IdiosAppsSoundboard
             var audioFiles = getAudioFiles();
             generateButtonSizes(audioFiles.Count);
             generateButtonFonts();
-            maxRetries = audioFiles.Count * 10;
+            maxRetries = audioFiles.Count * audioFiles.Count;
             bool generatedAllButtons = false;
             while (!generatedAllButtons)
             {
