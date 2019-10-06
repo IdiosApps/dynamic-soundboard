@@ -46,7 +46,7 @@ namespace IdiosAppsSoundboard
         private void generateButtonSizes(int numFiles)
         {
             int appArea = Width * Height;
-            int buttonArea = (appArea / numFiles) / 2;
+            int buttonArea = (appArea / numFiles) / 3;
             double squareLength = Math.Sqrt(buttonArea);
             buttonWidth = Convert.ToInt32(squareLength * 1.618);
             buttonHeight = Convert.ToInt32(squareLength / 1.618);
