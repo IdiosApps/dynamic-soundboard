@@ -91,7 +91,8 @@ namespace IdiosAppsSoundboard
                     FlatStyle = FlatStyle.Flat,
                     FlatAppearance = { BorderSize = 0},
                     Font = font,
-                    TextAlign = ContentAlignment.TopCenter
+                    TextAlign = ContentAlignment.TopCenter,
+                    AllowDrop = true
                 };
 
                 Controls.Add(button);
