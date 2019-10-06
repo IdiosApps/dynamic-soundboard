@@ -37,7 +37,7 @@ namespace IdiosAppsSoundboard
             while (!generatedAllButtons)
             {
                 Controls.Clear();
-                generatedAllButtons = generateAudioButtons(audioFiles);
+                generatedAllButtons = generateButtons(audioFiles);
             }
             generateClickEvents();
         }
@@ -67,7 +67,7 @@ namespace IdiosAppsSoundboard
             font = new Font("Segoe UI", fontSize, FontStyle.Regular);
         }
 
-        private bool generateAudioButtons(List<FileInfo> files)
+        private bool generateButtons(List<FileInfo> files)
         {
             foreach (var file in files)
             {
