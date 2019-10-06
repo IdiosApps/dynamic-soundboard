@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Media;
 using System.Windows.Forms;
 using WMPLib;
 
 namespace IdiosAppsSoundboard
 {
-    public partial class SoundboardForm : Form
+    public sealed partial class SoundboardForm : Form
     {
         private readonly List<string> audioExtensions = new List<string>() {".mp3", ".wav"};
-        private WindowsMediaPlayer soundPlayer = new WindowsMediaPlayer();
+        private readonly WindowsMediaPlayer soundPlayer = new WindowsMediaPlayer();
         private readonly string appDirectory = Directory.GetCurrentDirectory();
         private int buttonWidth = 100;
         private int buttonHeight = 100;
-        private Random random = new Random();
+        private readonly Random random = new Random();
 
         public SoundboardForm()
         {
@@ -64,13 +63,13 @@ namespace IdiosAppsSoundboard
         {
             foreach (var button in Controls.OfType<Button>())
             {
-                button.Click += new EventHandler(audioButtonClick);
+                button.Click += audioButtonClick;
             }
         }
 
         private void audioButtonClick(object sender, EventArgs e)
         {
-            // TODO Make all (or previous) button lose highlighting; highlight this button
+            // TODO Make button lose highlighting; highlight this button
 
             var button = sender as Button;
             soundPlayer.URL = Path.Combine(appDirectory, button.Name);

@@ -1,6 +1,6 @@
 ﻿namespace IdiosAppsSoundboard
 {
-    partial class SoundboardForm
+    sealed partial class SoundboardForm
     {
         /// <summary>
         /// Required designer variable.
