@@ -62,7 +62,7 @@ namespace IdiosAppsSoundboard
         private void generateButtonFonts()
         {
             List<int> fontSizes = new List<int>() { 8, 9, 10, 11, 12, 14, 16, 19, 20, 22, 24, 26, 28, 36, 48, 72 };
-            int fontSizeApprox = Convert.ToInt32(Math.Floor(buttonHeight * 0.1));
+            int fontSizeApprox = Convert.ToInt32(Math.Floor(buttonHeight * 0.2));
             int fontSize = fontSizes.OrderBy(size => Math.Abs(fontSizeApprox - size)).First();
             font = new Font("Segoe UI", fontSize, FontStyle.Regular);
         }
