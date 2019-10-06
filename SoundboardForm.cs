@@ -16,6 +16,7 @@ namespace IdiosAppsSoundboard
         private int buttonPadding;
         private int buttonWidth;
         private int buttonHeight;
+        private int titlebarHeight;
         private Font font;
         private int maxRetries;
         private readonly Random random = new Random();
@@ -28,6 +29,7 @@ namespace IdiosAppsSoundboard
             Height = Screen.PrimaryScreen.Bounds.Height;
             Width = Screen.PrimaryScreen.Bounds.Width / 2;
             buttonPadding = Convert.ToInt32(Width * 0.02);
+            titlebarHeight = Height - ClientSize.Height;
         }
 
         private void SoundboardForm_Load(object sender, EventArgs e)
@@ -121,7 +123,7 @@ namespace IdiosAppsSoundboard
                 bool newButtonOverlaps = false;
 
                 Point location = new Point(random.Next(0 + buttonPadding, this.Width - (buttonWidth + buttonPadding)),
-                    random.Next(0 + buttonPadding, this.Height - (buttonHeight + buttonPadding)));
+                    random.Next(0, this.Height - (buttonHeight + buttonPadding + titlebarHeight)));
                 Size size = new Size(buttonWidth + buttonPadding, buttonHeight + buttonPadding);
                 Rectangle rectangle = new Rectangle(location, size);
 
