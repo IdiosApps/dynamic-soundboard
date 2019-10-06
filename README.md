@@ -1,2 +1,2 @@
 # soundboard
-Super simple dynamic soundboard
+Super simple dynamically-generated soundboard
