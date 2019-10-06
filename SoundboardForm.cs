@@ -17,7 +17,7 @@ namespace IdiosAppsSoundboard
         private int buttonWidth;
         private int buttonHeight;
         private Font font;
-        private int maxRetries = 10;
+        private int maxRetries;
         private readonly Random random = new Random();
         private readonly Point invalidPoint = new Point(9999,9999);
 
@@ -27,7 +27,7 @@ namespace IdiosAppsSoundboard
             BackColor = Color.Black;
             Height = Screen.PrimaryScreen.Bounds.Height;
             Width = Screen.PrimaryScreen.Bounds.Width / 2;
-            buttonPadding = Convert.ToInt32(Width * 0.05);
+            buttonPadding = Convert.ToInt32(Width * 0.02);
         }
 
         private void SoundboardForm_Load(object sender, EventArgs e)
@@ -35,6 +35,7 @@ namespace IdiosAppsSoundboard
             var audioFiles = getAudioFiles();
             generateButtonSizes(audioFiles.Count);
             generateButtonFonts();
+            maxRetries = audioFiles.Count * 10;
             bool generatedAllButtons = false;
             while (!generatedAllButtons)
             {
