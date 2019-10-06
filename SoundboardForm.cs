@@ -131,7 +131,11 @@ namespace IdiosAppsSoundboard
                 }
 
                 if (!newButtonOverlaps)
+                {
+                    location.X += buttonPadding / 2; // symmetrical padding
+                    location.Y += buttonPadding / 2;
                     return location;
+                }
 
                 retries++;
             }
