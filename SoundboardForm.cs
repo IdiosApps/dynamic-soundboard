@@ -13,8 +13,9 @@ namespace IdiosAppsSoundboard
         private readonly List<string> audioExtensions = new List<string>() {".mp3", ".wav"};
         private readonly WindowsMediaPlayer soundPlayer = new WindowsMediaPlayer();
         private readonly string appDirectory = Directory.GetCurrentDirectory();
-        private int buttonWidth = 100;
-        private int buttonHeight = 100;
+        private int buttonPadding;
+        private int buttonWidth;
+        private int buttonHeight;
         private Font font;
         private int maxRetries = 10;
         private readonly Random random = new Random();
@@ -26,6 +27,7 @@ namespace IdiosAppsSoundboard
             BackColor = Color.Black;
             Height = Screen.PrimaryScreen.Bounds.Height;
             Width = Screen.PrimaryScreen.Bounds.Width / 2;
+            buttonPadding = Convert.ToInt32(Width * 0.05);
         }
 
         private void SoundboardForm_Load(object sender, EventArgs e)
@@ -117,8 +119,9 @@ namespace IdiosAppsSoundboard
             {
                 bool newButtonOverlaps = false;
 
-                Point location = new Point(random.Next(0, this.Width - buttonWidth), random.Next(0, this.Height - buttonHeight));
-                Size size = new Size(buttonWidth, buttonHeight);
+                Point location = new Point(random.Next(0 + buttonPadding, this.Width - (buttonWidth + buttonPadding)),
+                    random.Next(0 + buttonPadding, this.Height - (buttonHeight + buttonPadding)));
+                Size size = new Size(buttonWidth + buttonPadding, buttonHeight + buttonPadding);
                 Rectangle rectangle = new Rectangle(location, size);
 
                 foreach (var button in Controls.OfType<Button>())
