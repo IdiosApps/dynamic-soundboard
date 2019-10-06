@@ -122,7 +122,7 @@ namespace IdiosAppsSoundboard
             {
                 bool newButtonOverlaps = false;
 
-                Point location = new Point(random.Next(0 + buttonPadding, this.Width - (buttonWidth + buttonPadding)),
+                Point location = new Point(random.Next(0, this.Width - (buttonWidth + buttonPadding)),
                     random.Next(0, this.Height - (buttonHeight + buttonPadding + titlebarHeight)));
                 Size size = new Size(buttonWidth + buttonPadding, buttonHeight + buttonPadding);
                 Rectangle rectangle = new Rectangle(location, size);
