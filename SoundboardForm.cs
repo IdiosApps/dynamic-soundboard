@@ -15,6 +15,7 @@ namespace IdiosAppsSoundboard
         private readonly string appDirectory = Directory.GetCurrentDirectory();
         private int buttonWidth = 100;
         private int buttonHeight = 100;
+        private Font font;
         private readonly Random random = new Random();
 
         public SoundboardForm()
@@ -28,16 +29,33 @@ namespace IdiosAppsSoundboard
         private void SoundboardForm_Load(object sender, EventArgs e)
         {
             var audioFiles = getAudioFiles();
+            generateButtonSizes(audioFiles.Count);
+            generateButtonFonts();
             generateAudioButtons(audioFiles);
             generateClickEvents();
         }
 
         private List<FileInfo> getAudioFiles()
         {
-           return Directory.GetFiles(appDirectory)
+            return Directory.GetFiles(appDirectory)
                 .Select(file => new FileInfo(file))
                 .Where(fileInfo => audioExtensions.Contains(fileInfo.Extension))
                 .ToList();
+        }
+
+        private void generateButtonSizes(int numFiles)
+        {
+            int appArea = Width * Height;
+            int buttonArea = (appArea / numFiles) / 2;
+            double squareLength = Math.Sqrt(buttonArea);
+            buttonWidth = Convert.ToInt32(squareLength * 1.618);
+            buttonHeight = Convert.ToInt32(squareLength / 1.618);
+        }
+
+        private void generateButtonFonts()
+            int fontSizeApprox = Convert.ToInt32(Math.Floor(buttonHeight * 0.1));
+            int fontSize = fontSizes.OrderBy(size => Math.Abs(fontSizeApprox - size)).First();
+            font = new Font("Segoe UI", fontSize, FontStyle.Regular);
         }
 
         private void generateAudioButtons(List<FileInfo> files)
@@ -54,8 +72,9 @@ namespace IdiosAppsSoundboard
                     BackColor = Color.DimGray,
                     ForeColor = Color.GhostWhite,
                     FlatStyle = FlatStyle.Flat,
-                    FlatAppearance = { BorderSize = 0}
-                };
+                    FlatAppearance = { BorderSize = 0},
+                    Font = font
+                 };
 
                 Controls.Add(button);
             }
