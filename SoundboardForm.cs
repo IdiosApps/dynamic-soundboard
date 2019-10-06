@@ -58,10 +58,10 @@ namespace IdiosAppsSoundboard
         private void generateButtonSizes(int numFiles)
         {
             int appArea = Width * Height;
-            int buttonArea = (appArea / numFiles) / 3;
+            int buttonArea = Convert.ToInt32((appArea / numFiles) / 3.5);
             double squareLength = Math.Sqrt(buttonArea);
-            buttonWidth = Convert.ToInt32(squareLength * 1.618);
-            buttonHeight = Convert.ToInt32(squareLength / 1.618);
+            buttonWidth = Convert.ToInt32(squareLength * 2);
+            buttonHeight = Convert.ToInt32(squareLength / 2);
         }
 
         private void generateButtonFonts()
@@ -90,8 +90,9 @@ namespace IdiosAppsSoundboard
                     ForeColor = Color.GhostWhite,
                     FlatStyle = FlatStyle.Flat,
                     FlatAppearance = { BorderSize = 0},
-                    Font = font
-                 };
+                    Font = font,
+                    TextAlign = ContentAlignment.TopCenter
+                };
 
                 Controls.Add(button);
             }
@@ -122,7 +123,7 @@ namespace IdiosAppsSoundboard
             {
                 bool newButtonOverlaps = false;
 
-                Point location = new Point(random.Next(0, this.Width - (buttonWidth + buttonPadding)),
+                Point location = new Point(random.Next(0, this.Width - (buttonWidth + (2 * buttonPadding))),
                     random.Next(0, this.Height - (buttonHeight + buttonPadding + titlebarHeight)));
                 Size size = new Size(buttonWidth + buttonPadding, buttonHeight + buttonPadding);
                 Rectangle rectangle = new Rectangle(location, size);
