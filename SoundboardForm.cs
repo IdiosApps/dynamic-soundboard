@@ -21,6 +21,8 @@ namespace IdiosAppsSoundboard
         {
             InitializeComponent();
             BackColor = Color.Black;
+            Height = Screen.PrimaryScreen.Bounds.Height;
+            Width = Screen.PrimaryScreen.Bounds.Width / 2;
         }
 
         private void SoundboardForm_Load(object sender, EventArgs e)
@@ -70,7 +72,6 @@ namespace IdiosAppsSoundboard
         private void audioButtonClick(object sender, EventArgs e)
         {
             // TODO Make button lose highlighting; highlight this button
-
             var button = sender as Button;
             soundPlayer.URL = Path.Combine(appDirectory, button.Name);
             soundPlayer.controls.play();
